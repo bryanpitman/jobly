@@ -3,11 +3,16 @@
  * - job: An object with information about a job
  */
  function JobCard({job}) {
+    // can destructure the things in job
+    
     let companyName = null;
     
     if(job.companyName) {
         companyName = <div>{job.companyName}</div>
     }
+    // could also just do an &&
+    
+    // some jobs don't have equity
     
     return (
         <li>

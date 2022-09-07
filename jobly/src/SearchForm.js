@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 /** Function for rendering a search form
  * Props:
- * -handleSubmit: a function called when form is submitted 
+ * -search: a function called when form is submitted 
  *                 that changes state of parent when called
  * 
  * State:
- * -formData: The form data
+ * -filter: The form data
  */
 
 function SearchForm({ search }) {

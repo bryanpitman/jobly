@@ -20,6 +20,9 @@ function Companies() {
         setCompanies({data: await JoblyApi.getCompanies(filter),
         isLoading: false})
     }
+    
+    // technically, whenever a search is made, the companies are loading but the isLoading stays
+    // false because we don't set it back. We might need 3 states to handle this
 
     /** Calls api to get companies when page is first mounted */
     useEffect(function getCompaniesWhenMounted() {

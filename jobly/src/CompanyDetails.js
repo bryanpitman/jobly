@@ -24,11 +24,12 @@ function CompanyDetails() {
     
     /** Calls api to get company by handle when page is first mounted */
     useEffect(function getCompanyWhenMounted() {
-        getCompany();
         
+        getCompany();
     }, []);
     // UseEffect has a missing dependency: 'getCompany'. either include it or remove dependency list.
-    // WHYYYYYY
+    // WHYYYYYY >:(
+    // it's doomed.
     
     if(company.isLoading) {
         return <div>Loading...</div>

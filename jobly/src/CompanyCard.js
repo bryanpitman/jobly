@@ -22,4 +22,7 @@ function CompanyCard({company}) {
     )
 }
 
+// Try to use bootstrap to make actual company cards! This is uglilicious rn.
+// Maybe use ReactStrap?
+
 export default CompanyCard;
