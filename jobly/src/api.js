@@ -44,27 +44,32 @@ class JoblyApi {
     return res.company;
   }
 
-  /** Get a list of all companies. */
+  /** Get a list of all companies. 
+   * Accepts an optional parameter of filter to filter for companies with names
+   * that include the filter
+  */
 
   static async getCompanies(filter) {
     if (filter) {
-      let res = await this.request(`companies/?nameLike=${filter}`);
-      return res.company;
+      let res = await this.request(`companies/?name=${filter}`);
+      return res.companies;
     }
     let res = await this.request(`companies/`);
-    return res.company;
+    return res.companies;
   }
 
-    /** Get a list of jobs. */
+  /** Get a list of jobs. */
 
-    static async getJobs(filter) {
-      if (filter) {
-        let res = await this.request(`jobs/?title=${filter}`);
-        return res.jobs;
-      }
-      let res = await this.request(`jobs/`);
+  static async getJobs(filter) {
+    if (filter) {
+      let res = await this.request(`jobs/?title=${filter}`);
       return res.jobs;
     }
+    let res = await this.request(`jobs/`);
+    return res.jobs;
+  }
 
 
 }
+
+export default JoblyApi;
