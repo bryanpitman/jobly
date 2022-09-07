@@ -1,33 +1,27 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import "./Nav.css"
+import Navbar from 'react-bootstrap/Navbar';
+
 
 /** Navbar for links to different routes */
-function Nav() {
+function Navigation() {
   return (
-    <nav className="NavBar">
-      <NavLink to="/"
-        style={({ isActive }) => ({
-          color: isActive ? "green" : "blue"
-        })}>
+    <Navbar className="NavBar" bg="light" expand="lg">
+      <NavLink className="home" to="/">
         Jobly
       </NavLink>
       <br />
-      <NavLink to="/companies"
-        style={({ isActive }) => ({
-          color: isActive ? "green" : "blue"
-        })}>
+      <NavLink className="companies" to="/companies">
         Companies
       </NavLink>
       <br />
-      <NavLink to="/jobs"
-        style={({ isActive }) => ({
-          color: isActive ? "green" : "blue"
-        })}>
+      <NavLink className="jobs" to="/jobs">
         Jobs
       </NavLink>
       <br />
-    </nav>
+    </Navbar>
   );
 }
 
-export default Nav;
+export default Navigation;

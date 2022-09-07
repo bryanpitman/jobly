@@ -8,19 +8,21 @@ import JoblyApi from './api';
  * - Companies: An object:
  *  {data: [company, company...],
  *   isLoading: true/false}
+ *
+ * RoutesList -> Companies -> CompanyCardList 
  */
 function Companies() {
     const [companies, setCompanies] = useState({
         data: [],
         isLoading: true,
     })
-    
+
     /** calls API to fetch companies based on optional filter */
     async function getCompanies(filter='') {
         setCompanies({data: await JoblyApi.getCompanies(filter),
         isLoading: false})
     }
-    
+
     // technically, whenever a search is made, the companies are loading but the isLoading stays
     // false because we don't set it back. We might need 3 states to handle this
 
@@ -33,7 +35,7 @@ function Companies() {
     if(companies.isLoading) {
         return <div>Loading...</div>
     }
-    
+
     return (
         <div>
             <SearchForm search={getCompanies}/>

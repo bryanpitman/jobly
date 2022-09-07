@@ -1,13 +1,14 @@
 import {BrowserRouter} from 'react-router-dom'
 import RoutesList from './RoutesList';
-import Nav from "./Nav";
+import Navigation from "./Nav";
+
 
 /** App for Jobly application */
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Nav/>
+        <Navigation/>
         <RoutesList/>
       </BrowserRouter>
     </div>

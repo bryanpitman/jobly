@@ -5,36 +5,35 @@ import JobCardList from "./JobCardList";
 
 /** Renders details for a specific company based on URL parameter
  * State: company: an object with information about the company
- * 
+ *
+ * RoutesList -> Companies -> CompanyCardList -> CompanyCard -> CompanyDetails
  */
 function CompanyDetails() {
     const [company, setCompany] = useState({
         data: {},
         isLoading: true,
     })
-    
+
     const { handle } = useParams();
-    
+
     async function getCompany() {
         setCompany({
             data: await JoblyApi.getCompany(handle),
             isLoading: false,
         })
     }
-    
+
     /** Calls api to get company by handle when page is first mounted */
     useEffect(function getCompanyWhenMounted() {
-        
+
         getCompany();
     }, []);
-    // UseEffect has a missing dependency: 'getCompany'. either include it or remove dependency list.
-    // WHYYYYYY >:(
-    // it's doomed.
-    
+    // UseEffect has a missing dependency: but it works! =p 
+
     if(company.isLoading) {
         return <div>Loading...</div>
     }
-    
+
     return (
         <>
         <h1>{company.data.name}</h1>
