@@ -14,7 +14,6 @@ function CompanyDetails() {
     })
     
     const { handle } = useParams();
-    console.log(handle);
     
     async function getCompany() {
         setCompany({
@@ -28,6 +27,12 @@ function CompanyDetails() {
         getCompany();
         
     }, []);
+    // UseEffect has a missing dependency: 'getCompany'. either include it or remove dependency list.
+    // WHYYYYYY
+    
+    if(company.isLoading) {
+        return <div>Loading...</div>
+    }
     
     return (
         <>
