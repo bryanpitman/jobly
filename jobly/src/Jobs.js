@@ -14,7 +14,7 @@ import JoblyApi from './api';
         data: [],
         isLoading: true,
     })
-    
+
     /** calls API to fetch jobs based on optional filter */
     async function getJobs(filter='') {
         setJobs({data: await JoblyApi.getJobs(filter),
@@ -30,10 +30,11 @@ import JoblyApi from './api';
     if(jobs.isLoading) {
         return <div>Loading...</div>
     }
-    
+
     return (
-        <div>
+        <div class="JobList col-md-8 offset-md-2">
             <SearchForm search={getJobs}/>
+            <br/>
             <JobCardList jobs={jobs.data} />
         </div>
     )

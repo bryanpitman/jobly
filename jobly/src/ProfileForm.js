@@ -8,7 +8,7 @@ import { useContext } from "react";
  *
  * Props:
  * - updateProfile: functio to handle updating profile
- * 
+ *
  * State:
  * -formData: The form data
  *
@@ -19,8 +19,8 @@ function ProfileForm({updateProfile}) {
 
     const {userData} = useContext(userContext);
     const {username, firstName, lastName, email} = userData;
-    
-    // class="container col-md-6 offset-md-3 col-lg-4 offset-lg-4"
+
+
 
     const INITIAL_FORM_DATA = {
         username,
@@ -49,7 +49,7 @@ function ProfileForm({updateProfile}) {
         // Do we even need to setFormData again? Since it'll already be updated?
     }
     return (
-        <>
+        <div class="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
         <h1>Edit Profile</h1>
         <form onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -99,7 +99,7 @@ function ProfileForm({updateProfile}) {
                     aria-label="Email"
                 />
             </div>
-            {updated && 
+            {updated &&
             <div className="mb-3 alert alert-success" role="alert">Successfully Updated
             </div>}
 
@@ -107,7 +107,7 @@ function ProfileForm({updateProfile}) {
                 Save Changes
             </button>
         </form>
-        </>
+        </div>
     );
 }
 

@@ -9,7 +9,7 @@ import JoblyApi from './api';
  *  {data: [company, company...],
  *   isLoading: true/false}
  *
- * RoutesList -> Companies -> CompanyCardList 
+ * RoutesList -> Companies -> CompanyCardList
  */
 function Companies() {
     const [companies, setCompanies] = useState({
@@ -37,8 +37,9 @@ function Companies() {
     }
 
     return (
-        <div>
+        <div class="CompanyList col-md-8 offset-md-2">
             <SearchForm search={getCompanies}/>
+            <br/>
             <CompanyCardList companies={companies.data} />
         </div>
     )

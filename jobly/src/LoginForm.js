@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
  *
  * Props:
  * -login: handles login
- * 
+ *
  * State:
  * -formData: The form data
  *
@@ -39,7 +39,7 @@ function LoginForm({login}) {
         // why doesn't return Navigate to= work?
     }
     return (
-        <>
+        <div class="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
         <h1>Login!</h1>
         <form onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -70,7 +70,7 @@ function LoginForm({login}) {
                 Submit!
             </button>
         </form>
-        </>
+        </div>
     );
 }
 

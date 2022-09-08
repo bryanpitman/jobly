@@ -28,18 +28,18 @@ function CompanyDetails() {
 
         getCompany();
     }, []);
-    // UseEffect has a missing dependency: but it works! =p 
+    // UseEffect has a missing dependency: but it works! =p
 
     if(company.isLoading) {
         return <div>Loading...</div>
     }
 
     return (
-        <>
+        <div class="CompanyDetails col-md-8 offset-md-2">
         <h1>{company.data.name}</h1>
         <h2>{company.data.description}</h2>
         <JobCardList jobs={company.data.jobs} />
-        </>
+        </div>
     )
 }
 
