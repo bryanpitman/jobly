@@ -19,6 +19,8 @@ function ProfileForm({updateProfile}) {
 
     const {userData} = useContext(userContext);
     const {username, firstName, lastName, email} = userData;
+    
+    // class="container col-md-6 offset-md-3 col-lg-4 offset-lg-4"
 
     const INITIAL_FORM_DATA = {
         username,
