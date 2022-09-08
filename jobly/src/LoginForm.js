@@ -39,7 +39,7 @@ function LoginForm({login}) {
         // why doesn't return Navigate to= work?
     }
     return (
-        <div class="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+        <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
         <h1>Login!</h1>
         <form onSubmit={handleSubmit}>
             <div className="mb-3">

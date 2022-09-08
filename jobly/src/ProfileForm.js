@@ -49,7 +49,7 @@ function ProfileForm({updateProfile}) {
         // Do we even need to setFormData again? Since it'll already be updated?
     }
     return (
-        <div class="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+        <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
         <h1>Edit Profile</h1>
         <form onSubmit={handleSubmit}>
             <div className="mb-3">

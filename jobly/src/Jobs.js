@@ -32,7 +32,7 @@ import JoblyApi from './api';
     }
 
     return (
-        <div class="JobList col-md-8 offset-md-2">
+        <div className="JobList col-md-8 offset-md-2">
             <SearchForm search={getJobs}/>
             <br/>
             <JobCardList jobs={jobs.data} />

@@ -37,7 +37,7 @@ function Companies() {
     }
 
     return (
-        <div class="CompanyList col-md-8 offset-md-2">
+        <div className="CompanyList col-md-8 offset-md-2">
             <SearchForm search={getCompanies}/>
             <br/>
             <CompanyCardList companies={companies.data} />

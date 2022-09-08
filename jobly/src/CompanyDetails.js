@@ -35,7 +35,7 @@ function CompanyDetails() {
     }
 
     return (
-        <div class="CompanyDetails col-md-8 offset-md-2">
+        <div className="CompanyDetails col-md-8 offset-md-2">
         <h1>{company.data.name}</h1>
         <h2>{company.data.description}</h2>
         <JobCardList jobs={company.data.jobs} />

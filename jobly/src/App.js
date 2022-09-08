@@ -10,17 +10,19 @@ import jwt_decode from "jwt-decode";
 function App() {
   const [user, setUser] = useState({ userData: null });
 
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   async function login(formData) {
     const newToken = await JoblyApi.login(formData);
     setToken(newToken);
+    localStorage.setItem('token', newToken);
   }
 
   async function signup(formData) {
     const newToken = await JoblyApi.signup(formData);
     console.log("signup token", newToken);
     setToken(newToken);
+    localStorage.setItem('token', newToken);
   }
 
   async function updateProfile(formData) {
@@ -31,6 +33,7 @@ function App() {
   function logout() {
     JoblyApi.token = null;
     setToken(null);
+    localStorage.removeItem('token');
   }
   // what happens when someone logs out and it tries to decode null?
   // that's why we have the if(token) part
@@ -54,7 +57,7 @@ function App() {
     },
     [token]
   );
-  
+
   // userContext should just be about presentational information about user
   // for the functions (login, signup, updateProfile), we should prop drill them
 

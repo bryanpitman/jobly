@@ -9,18 +9,18 @@ import ProfileForm from './ProfileForm';
 import userContext from './userContext';
 import { useContext } from "react";
 
-/** Function for handling all the routes of the Jobly app 
+/** Function for handling all the routes of the Jobly app
  * Props:
  * - login: function for handling login
  * - signup: function for handling signup
  * - updateProfile: function for handling update profile
 */
 function RoutesList({login, signup, updateProfile}) {
-  
-  const {userData}  = useContext(userContext);
+
+  // const {userData}  = useContext(userContext);
   let validRoutes = null;
-  
-  if(userData) {
+
+  if(localStorage.getItem('token')) {
     validRoutes = (
       <>
       <Route element= { <Companies/>} path="/companies" />
@@ -30,7 +30,7 @@ function RoutesList({login, signup, updateProfile}) {
       </>
     )
   }
-  
+
   else {
     validRoutes = (
       <>
@@ -45,7 +45,7 @@ function RoutesList({login, signup, updateProfile}) {
   }
   // is there a way to put multiple paths for a single route?
   // {["/home", "/users", "/widgets"]} not working
-  
+
   return (
     <Routes>
       <Route element= { <Home />} path="/" />
