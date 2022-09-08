@@ -44,10 +44,8 @@ function App() {
         if (token) {
           JoblyApi.token = token;
           const { username } = jwt_decode(token);
-          console.log("username: ", username);
           let currUser = await JoblyApi.getUser(username); //should give use entire user object
           setUser({ userData: currUser });
-          console.log("user: ", user);
           // put this directly into userData instead of payload so we don't get iat
         } else {
           setUser({ userData: null });

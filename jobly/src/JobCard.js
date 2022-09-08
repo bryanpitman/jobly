@@ -18,7 +18,7 @@ function JobCard({ job }) {
   let companyEquity = null;
 
   if (job.equity) {
-    companyEquity = <div>Equity: {job.equity}</div>;
+    companyEquity = `Equity: ${job.equity}`;
   }
   // could also just do an &&
 
@@ -32,7 +32,8 @@ function JobCard({ job }) {
           {companyName}
           <Card.Text>
             {" "}
-            <div>Salary: {job.salary}</div>
+            Salary: {job.salary}
+            <br/>
             {companyEquity}
           </Card.Text>
         </Card.Body>
