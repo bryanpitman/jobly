@@ -19,6 +19,7 @@ class JoblyApi {
     "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
     "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
+
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
 
@@ -69,7 +70,31 @@ class JoblyApi {
     return res.jobs;
   }
 
+  /** Get a token for when you login */
+  static async login(formData) {
+    let res = await this.request(`auth/token`, formData, "post")
 
+    return res.token;
+
+  }
+
+  /** Register user and get token */
+  static async signup(formData) {
+    let res = await this.request(`auth/register`, formData, "post")
+    
+    console.log('formdata', formData)
+
+    return res.token;
+  }
+
+  /** Update a user's profile */
+  static async updateProfile(formData) {
+    const { username, firstName, lastName, email } = formData;
+    const patchData = { firstName, lastName, email }
+
+    await this.request(`users/${username}`, patchData, "patch")
+
+  }
 }
 
 export default JoblyApi;

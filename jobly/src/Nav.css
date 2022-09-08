@@ -1,37 +1,28 @@
-.home {
+.home, .companies, .jobs, .profile, .logout {
     float: right;
     padding: 12px;
     color: blue;
     text-decoration: none;
     font-size: 17px;
-    width: 33%;
+    width: 20%;
     text-align: center;
 
 }
 
- .jobs {
+.login,
+.signup {
 
     float: right;
     padding: 12px;
     color: blue;
     text-decoration: none;
     font-size: 17px;
-    width: 33%;
+    width: 40%;
     text-align: center;
 
-}
-
-.companies {
-    float: right;
-  padding: 12px;
-  color: blue;
-  text-decoration: none;
-  font-size: 17px;
-  width: 33%;
-  text-align: center;
 }
 
 .active {
-    color:black;
+    color: black;
     font-weight: bold;
 }
