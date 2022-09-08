@@ -30,9 +30,10 @@ function App() {
 
   function logout() {
     JoblyApi.token = null;
-    setToken(JoblyApi.token);
+    setToken(null);
   }
   // what happens when someone logs out and it tries to decode null?
+  // that's why we have the if(token) part
 
   useEffect(
     function updateUser() {
@@ -53,15 +54,18 @@ function App() {
     },
     [token]
   );
+  
+  // userContext should just be about presentational information about user
+  // for the functions (login, signup, updateProfile), we should prop drill them
 
   return (
     <div className="App">
       <userContext.Provider
-        value={{ user, login, signup, updateProfile, logout }}
+        value={user}
       >
         <BrowserRouter>
-          <Navigation />
-          <RoutesList />
+          <Navigation logout={logout}/>
+          <RoutesList login={login} signup={signup} updateProfile={updateProfile}/>
         </BrowserRouter>
       </userContext.Provider>
     </div>
@@ -74,3 +78,7 @@ function App() {
 // };
 
 export default App;
+
+// Possible further study things:
+// live search, pagination, testing with ajax and mocking :( should do this, custom hooks
+// kinda repetitive: job applications, show list of companies applied to, add edit form for companies

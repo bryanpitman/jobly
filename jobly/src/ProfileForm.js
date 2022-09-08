@@ -6,16 +6,19 @@ import { useContext } from "react";
 
 /** Function for rendering an edit profile form
  *
+ * Props:
+ * - updateProfile: functio to handle updating profile
+ * 
  * State:
  * -formData: The form data
  *
  * RoutesList -> ProfileForm
  */
 
-function ProfileForm() {
+function ProfileForm({updateProfile}) {
 
-    const { updateProfile, user } = useContext(userContext);
-    const {username, firstName, lastName, email} = user.userData;
+    const {userData} = useContext(userContext);
+    const {username, firstName, lastName, email} = userData;
 
     const INITIAL_FORM_DATA = {
         username,

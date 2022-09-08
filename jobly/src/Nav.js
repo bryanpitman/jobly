@@ -5,13 +5,16 @@ import userContext from './userContext';
 import { useContext } from "react";
 
 
-/** Navbar for links to different routes */
-function Navigation() {
-  const { user, logout } = useContext(userContext);
+/** Navbar for links to different routes 
+ * Props:
+ * - logout: function for handling logout
+*/
+function Navigation({logout}) {
+  const  {userData}  = useContext(userContext);
   
   let loggedIn = null;
   
-  if(user.userData) {
+  if(userData) {
     loggedIn = (
       <><NavLink className="companies" to="/companies">
         Companies
@@ -26,7 +29,7 @@ function Navigation() {
       </NavLink>
       <br />
       <NavLink className="logout" onClick={logout} to="/">
-        Log out {user.userData.username}
+        Log out {userData.username}
       </NavLink>
       <br />
       </>

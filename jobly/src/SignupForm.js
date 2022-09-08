@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import userContext from './userContext';
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom"
 
 /** Function for rendering a signup form
+ * Props:
+ * - signup: function for handling signup
 
  * State:
  * -formData: The form data
@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom"
  * RoutesList -> SignupForm
  */
 
-function SignupForm() {
+function SignupForm({signup}) {
     const INITIAL_FORM_DATA = {
         username: '',
         password: '',
@@ -20,8 +20,6 @@ function SignupForm() {
         email: '',
     }
     const navigate = useNavigate();
-
-    const { signup } = useContext(userContext);
 
     const [formData, setFormData] = useState(INITIAL_FORM_DATA);
 

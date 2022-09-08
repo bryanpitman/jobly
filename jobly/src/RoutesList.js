@@ -9,28 +9,33 @@ import ProfileForm from './ProfileForm';
 import userContext from './userContext';
 import { useContext } from "react";
 
-/** Function for handling all the routes of the Jobly app */
-function RoutesList() {
+/** Function for handling all the routes of the Jobly app 
+ * Props:
+ * - login: function for handling login
+ * - signup: function for handling signup
+ * - updateProfile: function for handling update profile
+*/
+function RoutesList({login, signup, updateProfile}) {
   
-  const { user } = useContext(userContext);
-  let loggedIn = null;
+  const {userData}  = useContext(userContext);
+  let validRoutes = null;
   
-  if(user.userData) {
-    loggedIn = (
+  if(userData) {
+    validRoutes = (
       <>
       <Route element= { <Companies/>} path="/companies" />
       <Route element= { <CompanyDetails/>} path="/companies/:handle" />
       <Route element= { <Jobs />} path="/jobs" />
-      <Route element= { <ProfileForm />} path="/profile" />
+      <Route element= { <ProfileForm updateProfile={updateProfile}/>} path="/profile" />
       </>
     )
   }
   
   else {
-    loggedIn = (
+    validRoutes = (
       <>
-      <Route element= { <LoginForm />} path="/login" />
-      <Route element= { <SignupForm />} path="/signup" />
+      <Route element= { <LoginForm login={login}/>} path="/login" />
+      <Route element= { <SignupForm signup={signup}/>} path="/signup" />
       <Route element= { <Navigate to="/login" />} path="/companies" />
       <Route element= { <Navigate to="/login" />} path="/companies/:handle" />
       <Route element= { <Navigate to="/login" />} path="/jobs" />
@@ -44,7 +49,7 @@ function RoutesList() {
   return (
     <Routes>
       <Route element= { <Home />} path="/" />
-      {loggedIn}
+      {validRoutes}
       <Route element= { <Navigate to="/" />} path="*" />
     </Routes>
   );

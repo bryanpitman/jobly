@@ -1,24 +1,24 @@
 import { useState } from 'react';
-import userContext from './userContext';
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom"
 
 
 /** Function for rendering a login form
  *
+ * Props:
+ * -login: handles login
+ * 
  * State:
  * -formData: The form data
  *
  * RoutesList -> LoginForm
  */
 
-function LoginForm() {
+function LoginForm({login}) {
     const INITIAL_FORM_DATA = {
         username: '',
         password: '',
     }
     const navigate = useNavigate();
-    const { login } = useContext(userContext);
 
     const [formData, setFormData] = useState(INITIAL_FORM_DATA);
 
