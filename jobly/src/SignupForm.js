@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import userContext from './userContext';
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom"
 
 /** Function for rendering a signup form
 
@@ -18,7 +19,8 @@ function SignupForm() {
         lastName: '',
         email: '',
     }
-    
+    const navigate = useNavigate();
+
     const { signup } = useContext(userContext);
 
     const [formData, setFormData] = useState(INITIAL_FORM_DATA);
@@ -37,10 +39,11 @@ function SignupForm() {
         signup(formData);
         setFormData(INITIAL_FORM_DATA);
         // include logic for changing url: Navigate
+        navigate("/");
     }
     return (
         <>
-        <h1>Login!</h1>
+        <h1>Signup</h1>
         <form onSubmit={handleSubmit}>
             <div className="mb-3">
             <label>Username</label>
@@ -66,7 +69,7 @@ function SignupForm() {
                     minLength="5"
                 />
             </div>
-            
+
             <div className="mb-3">
             <label>First Name</label>
                 <input
@@ -78,7 +81,7 @@ function SignupForm() {
                     aria-label="First Name"
                 />
             </div>
-            
+
             <div className="mb-3">
             <label>Last Name</label>
                 <input
@@ -90,7 +93,7 @@ function SignupForm() {
                     aria-label="Last Name"
                 />
             </div>
-            
+
             <div className="mb-3">
             <label>Email</label>
                 <input
@@ -102,7 +105,7 @@ function SignupForm() {
                     aria-label="Email"
                 />
             </div>
-            
+
             <button className="btn-primary rig btn btn-sm">
                 Submit!
             </button>

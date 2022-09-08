@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import userContext from './userContext';
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom"
+
 
 /** Function for rendering a login form
  *
@@ -15,7 +17,7 @@ function LoginForm() {
         username: '',
         password: '',
     }
-    
+    const navigate = useNavigate();
     const { login } = useContext(userContext);
 
     const [formData, setFormData] = useState(INITIAL_FORM_DATA);
@@ -28,11 +30,12 @@ function LoginForm() {
         setFormData(currData => ({ ...currData, [fieldName]: value }))
     }
 
-    /** Call parent function and clear form. */
+    /** Call parent function, clear form and return to homepage. */
     function handleSubmit(evt) {
         evt.preventDefault();
         login(formData);
         setFormData(INITIAL_FORM_DATA);
+        navigate("/");
     }
     return (
         <>
@@ -53,6 +56,7 @@ function LoginForm() {
             <div className="mb-3">
                 <label>Password</label>
                 <input
+                    type="password"
                     id="password"
                     name="password"
                     className="form-control"

@@ -14,11 +14,11 @@ class JoblyApi {
   // Remember, the backend needs to be authorized with a token
   // We're providing a token you can use to interact with the backend API
   // DON'T MODIFY THIS TOKEN
-  static token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
-
+  // static token =
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
+  //   "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
+  //   "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  static token;
 
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
@@ -45,7 +45,7 @@ class JoblyApi {
     return res.company;
   }
 
-  /** Get a list of all companies. 
+  /** Get a list of all companies.
    * Accepts an optional parameter of filter to filter for companies with names
    * that include the filter
   */
@@ -81,10 +81,11 @@ class JoblyApi {
   /** Register user and get token */
   static async signup(formData) {
     let res = await this.request(`auth/register`, formData, "post")
-    
+
     console.log('formdata', formData)
 
     return res.token;
+    
   }
 
   /** Update a user's profile */
@@ -92,9 +93,15 @@ class JoblyApi {
     const { username, firstName, lastName, email } = formData;
     const patchData = { firstName, lastName, email }
 
-    await this.request(`users/${username}`, patchData, "patch")
-
+    let response = await this.request(`users/${username}`, patchData, "patch")
+    return response.user;
   }
+
+  static async getUser(username){
+    const res = await this.request(`users/${username}`)
+    return res.user;
+  }
+
 }
 
 export default JoblyApi;

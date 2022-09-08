@@ -2,6 +2,8 @@ import { useState } from 'react';
 import userContext from './userContext';
 import { useContext } from "react";
 
+
+
 /** Function for rendering an edit profile form
  *
  * State:
@@ -11,15 +13,17 @@ import { useContext } from "react";
  */
 
 function ProfileForm() {
+
+    const { updateProfile, user } = useContext(userContext);
+    const {username, firstName, lastName, email} = user.userData;
+
     const INITIAL_FORM_DATA = {
-        username: '',
-        password: '',
-        firstName: '',
-        lastName: '',
-        email: '',
+        username,
+        firstName,
+        lastName,
+        email,
     }
-    
-    const { updateProfile } = useContext(userContext);
+
 
 
     const [formData, setFormData] = useState(INITIAL_FORM_DATA);
@@ -40,7 +44,7 @@ function ProfileForm() {
     }
     return (
         <>
-        <h1>Login!</h1>
+        <h1>Edit Profile</h1>
         <form onSubmit={handleSubmit}>
             <div className="mb-3">
             <label>Username</label>
@@ -53,7 +57,7 @@ function ProfileForm() {
                     aria-label="Username"
                 />
             </div>
-            
+
             <div className="mb-3">
             <label>First Name</label>
                 <input
@@ -65,7 +69,7 @@ function ProfileForm() {
                     aria-label="First Name"
                 />
             </div>
-            
+
             <div className="mb-3">
             <label>Last Name</label>
                 <input
@@ -77,7 +81,7 @@ function ProfileForm() {
                     aria-label="Last Name"
                 />
             </div>
-            
+
             <div className="mb-3">
             <label>Email</label>
                 <input
@@ -89,7 +93,7 @@ function ProfileForm() {
                     aria-label="Email"
                 />
             </div>
-            
+
             <button className="btn-primary rig btn btn-sm">
                 Save Changes
             </button>
