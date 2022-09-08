@@ -36,6 +36,7 @@ function LoginForm() {
         login(formData);
         setFormData(INITIAL_FORM_DATA);
         navigate("/");
+        // why doesn't return Navigate to= work?
     }
     return (
         <>

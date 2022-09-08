@@ -8,14 +8,12 @@ import { useContext } from "react";
 /** Navbar for links to different routes */
 function Navigation() {
   const { user, logout } = useContext(userContext);
-
-  return (
-    <Navbar className="NavBar" bg="light" expand="lg">
-      <NavLink className="home" to="/">
-        Jobly
-      </NavLink>
-      <br />
-      {user.userData && <><NavLink className="companies" to="/companies">
+  
+  let loggedIn = null;
+  
+  if(user.userData) {
+    loggedIn = (
+      <><NavLink className="companies" to="/companies">
         Companies
       </NavLink>
       <br />
@@ -31,8 +29,12 @@ function Navigation() {
         Log out {user.userData.username}
       </NavLink>
       <br />
-      </>}
-      {!user.userData && <>
+      </>
+    )
+  }
+  else {
+    loggedIn = (
+      <>
         <NavLink className="login" to="/login">
         Login
       </NavLink>
@@ -41,7 +43,17 @@ function Navigation() {
         Signup
       </NavLink>
       <br />
-      </>}
+      </>
+    )
+  }
+
+  return (
+    <Navbar className="NavBar" bg="light" expand="lg">
+      <NavLink className="home" to="/">
+        Jobly
+      </NavLink>
+      <br />
+      {loggedIn}
     </Navbar>
   );
 }

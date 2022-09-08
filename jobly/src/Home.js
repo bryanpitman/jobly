@@ -3,11 +3,12 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 function Home() {
-    const { userData } = useContext(userContext);
+    const { user } = useContext(userContext);
+    console.log('user', user.userData)
 
-    if (userData) {
+    if (user.userData) {
         return (
-            <h1>Welcome back {userData.username}</h1>
+            <h1>Welcome back {user.userData.username}</h1>
         )
     }
 

@@ -24,9 +24,8 @@ function ProfileForm() {
         email,
     }
 
-
-
     const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+    const [updated, setUpdated] = useState(false);
 
     /** Update form input. */
     function handleChange(evt) {
@@ -40,7 +39,9 @@ function ProfileForm() {
     function handleSubmit(evt) {
         evt.preventDefault();
         updateProfile(formData);
-        setFormData(INITIAL_FORM_DATA);
+        setUpdated(true);
+        // setFormData(INITIAL_FORM_DATA);
+        // Do we even need to setFormData again? Since it'll already be updated?
     }
     return (
         <>
@@ -93,6 +94,9 @@ function ProfileForm() {
                     aria-label="Email"
                 />
             </div>
+            {updated && 
+            <div className="mb-3 alert alert-success" role="alert">Successfully Updated
+            </div>}
 
             <button className="btn-primary rig btn btn-sm">
                 Save Changes
