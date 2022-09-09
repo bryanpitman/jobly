@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom"
+import Alert from './Alert';
 
 
 /** Function for rendering a login form
@@ -13,7 +14,7 @@ import { useNavigate } from "react-router-dom"
  * RoutesList -> LoginForm
  */
 
-function LoginForm({login}) {
+function LoginForm({ login }) {
     const INITIAL_FORM_DATA = {
         username: '',
         password: '',
@@ -21,6 +22,7 @@ function LoginForm({login}) {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+    const [wrongCredentials, setWrongCredentials] = useState('');
 
     /** Update form input. */
     function handleChange(evt) {
@@ -31,45 +33,55 @@ function LoginForm({login}) {
     }
 
     /** Call parent function, clear form and return to homepage. */
-    function handleSubmit(evt) {
+    async function handleSubmit(evt) {
         evt.preventDefault();
-        login(formData);
-        setFormData(INITIAL_FORM_DATA);
-        navigate("/");
-        // why doesn't return Navigate to= work?
+        try {
+            await login(formData);
+            setFormData(INITIAL_FORM_DATA);
+            navigate("/");
+            // why doesn't return Navigate to= work?
+        }
+        catch (err) {
+            setWrongCredentials(err[0]);
+            console.log('error', err)
+        }
     }
+    // make sure to await the async function!!
+
     return (
         <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-        <h1>Login!</h1>
-        <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-                <label>Username</label>
-                <input
-                    id="username"
-                    name="username"
-                    className="form-control"
-                    onChange={handleChange}
-                    value={formData.username}
-                    aria-label="Username"
-                />
-            </div>
+            <h1>Login!</h1>
+            <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <label>Username</label>
+                    <input
+                        id="username"
+                        name="username"
+                        className="form-control"
+                        onChange={handleChange}
+                        value={formData.username}
+                        aria-label="Username"
+                    />
+                </div>
 
-            <div className="mb-3">
-                <label>Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    className="form-control"
-                    onChange={handleChange}
-                    value={formData.password}
-                    aria-label="Password"
-                />
-            </div>
-            <button className="btn-primary rig btn btn-sm">
-                Submit!
-            </button>
-        </form>
+                <div className="mb-3">
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        className="form-control"
+                        onChange={handleChange}
+                        value={formData.password}
+                        aria-label="Password"
+                    />
+                </div>
+                {wrongCredentials &&
+                    <Alert message={wrongCredentials} type="danger"/>}
+                <button className="btn-primary rig btn btn-sm">
+                    Submit!
+                </button>
+            </form>
         </div>
     );
 }

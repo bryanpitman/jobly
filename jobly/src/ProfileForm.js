@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import userContext from './userContext';
 import { useContext } from "react";
-
+import Alert from './Alert';
 
 
 /** Function for rendering an edit profile form
@@ -20,8 +20,6 @@ function ProfileForm({updateProfile}) {
     const {userData} = useContext(userContext);
     const {username, firstName, lastName, email} = userData;
 
-
-
     const INITIAL_FORM_DATA = {
         username,
         firstName,
@@ -31,6 +29,7 @@ function ProfileForm({updateProfile}) {
 
     const [formData, setFormData] = useState(INITIAL_FORM_DATA);
     const [updated, setUpdated] = useState(false);
+    const [wrongCredentials, setWrongCredentials] = useState([]);
 
     /** Update form input. */
     function handleChange(evt) {
@@ -41,12 +40,18 @@ function ProfileForm({updateProfile}) {
     }
 
     /** Call parent function and clear form. */
-    function handleSubmit(evt) {
+    async function handleSubmit(evt) {
         evt.preventDefault();
-        updateProfile(formData);
-        setUpdated(true);
-        // setFormData(INITIAL_FORM_DATA);
-        // Do we even need to setFormData again? Since it'll already be updated?
+        try {
+            await updateProfile(formData);
+            setUpdated(true);
+            // setFormData(INITIAL_FORM_DATA);
+            // Do we even need to setFormData again? Since it'll already be updated?
+        }
+        catch (err) {
+            setWrongCredentials(err);
+        }
+        // NOTE: err is an array of error messages!!!
     }
     return (
         <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
@@ -100,9 +105,10 @@ function ProfileForm({updateProfile}) {
                 />
             </div>
             {updated &&
-            <div className="mb-3 alert alert-success" role="alert">Successfully Updated
-            </div>}
-
+                    <Alert message="Updated Successfully!" type="success"/>}
+            {wrongCredentials &&
+                    wrongCredentials.map(
+                        err => <Alert key={err} message={err} type="danger"/>)}
             <button className="btn-primary rig btn btn-sm">
                 Save Changes
             </button>
