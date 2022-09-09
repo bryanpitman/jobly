@@ -8,7 +8,7 @@ import jwt_decode from "jwt-decode";
 
 /** App for Jobly application */
 function App() {
-  const [user, setUser] = useState({ userData: null });
+  const [user, setUser] = useState({ userData: null, isLoading: true });
 
   const [token, setToken] = useState(localStorage.getItem('token'));
 
@@ -27,7 +27,7 @@ function App() {
 
   async function updateProfile(formData) {
     const updatedUser = await JoblyApi.updateProfile(formData);
-    setUser({ userData: updatedUser });
+    setUser({ userData: updatedUser, isLoading: false });
   }
 
   function logout() {
@@ -44,17 +44,18 @@ function App() {
         if (token) {
           JoblyApi.token = token;
           const { username } = jwt_decode(token);
-          let currUser = await JoblyApi.getUser(username); //should give use entire user object
-          setUser({ userData: currUser });
+          let currUser = await JoblyApi.getUser(username); //should give user entire user object
+          setUser({ userData: currUser, isLoading: false });
           // put this directly into userData instead of payload so we don't get iat
         } else {
-          setUser({ userData: null });
+          setUser({ userData: null, isLoading: false });
         }
       }
       getUserDetails();
     },
     [token]
   );
+  // useEffect runs AFTER the first render!!!
 
   // userContext should just be about presentational information about user
   // for the functions (login, signup, updateProfile), we should prop drill them

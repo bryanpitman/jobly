@@ -9,7 +9,13 @@ function Home() {
     if (userData) {
       return <h1>Welcome back {userData.username}</h1>;
     } else {
-        return <h2>Loading.........</h2>;
+      return (
+        <div
+          className="spinner-border"
+          style={{ width: "10rem", height: "10rem" }}
+          role="status"
+        ></div>
+      );
     }
   }
 

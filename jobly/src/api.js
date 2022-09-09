@@ -85,7 +85,7 @@ class JoblyApi {
     console.log('formdata', formData)
 
     return res.token;
-    
+
   }
 
   /** Update a user's profile */
